@@ -1,0 +1,44 @@
+<!--pages/list.wxml-->
+<view id="bodt">
+<view><image src="https://tuchuang-1309886987.cos.ap-beijing.myqcloud.com/xiaohui2.png" alt="xiaohui" style="height: 70px;width: 290px;"></image>
+<view class='title'>空调电量查询系统</view>
+<view>暂且仅支持华科</view>
+
+</view>
+
+<form class="form" catchsubmit="formSubmit">
+
+<view class="building">
+	<picker name='building' bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker">
+      当前选择：{{array[index]}}
+    </view>
+  </picker>
+</view>
+
+
+<view id="inputroom">
+<button bindtap="what" style="width: 470rpx; height: 80rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx"><view style="text-decoration:underline;">八号楼房间号规则(戳我)</view></button>
+<view>\t\n</view>
+<input name='room' type="number"  placeholder="输入房间号"/>
+</view>
+     
+<view class="btn-area">
+        <button style="margin: 30rpx auto" type="primary" formType="submit">查询</button>
+        <button style="margin: 30rpx auto; background-color: white;" formType="reset">清空</button>
+</view>
+</form>
+<view>
+<view id="sydl" style="font-size: 40px;"><text>{{shengyu}}</text></view>
+<view class="dianliang">{{kongtiao}}<text style="font-size: 25px; font-weight: bold;">{{du}}</text></view>
+</view>
+
+
+<view class="weui-footer">
+<view>若遇到问题，请联系右侧客服</view>
+<view>Version 3.0.3</view>
+<view  class="weui-footer__text">Copyright © 2022 topxls.cn && Choice37</view>
+</view>
+
+</view>
+<button id="kf" open-type="contact" ><image src="kf.png" alt="客服" style="height: 40px;width: 40px;"></image></button>
