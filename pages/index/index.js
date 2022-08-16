@@ -91,6 +91,7 @@ Page({
     },
     //点击查询后执行    
     formSubmit(e) {
+       
         let room = e.detail.value.room;
         let building = e.detail.value.building.valueOf()
         if (e.detail.value.building == -1 || e.detail.value.building == 0) {

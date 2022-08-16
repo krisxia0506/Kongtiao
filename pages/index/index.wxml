@@ -1,6 +1,7 @@
 <!--pages/list.wxml-->
 <view id="bodt">
-<view><image src="https://tuchuang-1309886987.cos.ap-beijing.myqcloud.com/xiaohui2.png" alt="xiaohui" style="height: 70px;width: 290px;"></image>
+
+<view style="padding: 20px;"><image src="https://tuchuang-1309886987.cos.ap-beijing.myqcloud.com/xiaohui2.png" alt="xiaohui" mode="widthFix" style="width: 100%;"></image>
 <view class='title'>空调电量查询系统</view>
 <view>暂且仅支持华科</view>
 
@@ -18,8 +19,8 @@
 
 
 <view id="inputroom">
-<button bindtap="what" style="width: 470rpx; height: 80rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx"><view style="text-decoration:underline;">八号楼房间号规则(戳我)</view></button>
-<view>\t\n</view>
+<button bindtap="what" style="width: 500rpx; height: 71rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx"><view style="text-decoration:underline;">八号楼房间号规则(戳我)</view></button>
+
 <input name='room' type="number"  placeholder="输入房间号"/>
 </view>
      
