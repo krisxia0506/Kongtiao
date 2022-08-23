@@ -38,6 +38,8 @@ Page({
                         //判断查询结果json的returncode字段
                         if (JSON.parse(res.data).returncode == '100') {
                             resolve(JSON.parse(res.data).quantity)
+                        } else if (JSON.parse(res.data).returncode == '-600') {
+                            resolve('error1')
                         } else {
                             //查询成果返回json的quantity字段            
                             resolve('error')
@@ -77,6 +79,13 @@ Page({
                     kongtiao: '',
                     du: ''
                 })
+            } else if (data == 'error1') {
+                wx.hideLoading();
+                this.setData({
+                    shengyu: '系统升级维护中',
+                    kongtiao: '请稍后重试',
+                    du: ''
+                })
             } else {
                 wx.hideLoading();
                 this.setData({
@@ -91,7 +100,7 @@ Page({
     },
     //点击查询后执行    
     formSubmit(e) {
-       
+
         let room = e.detail.value.room;
         let building = e.detail.value.building.valueOf()
         if (e.detail.value.building == -1 || e.detail.value.building == 0) {

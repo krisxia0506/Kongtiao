@@ -1,8 +1,8 @@
 {
     "pages": [
         "pages/index/index",
-        "pages/logs/logs"
-        
+        "pages/logs/logs",
+        "pages/E"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -11,13 +11,12 @@
         "navigationBarTextStyle": "black"
     },
     "style": "v2",
-	"sitemapLocation": "sitemap.json",
+    "sitemapLocation": "sitemap.json",
     "lazyCodeLoading": "requiredComponents",
     "networkTimeout": {
         "request": 10000,
         "connectSocket": 10000,
         "uploadFile": 10000,
         "downloadFile": 10000
-      }
-    
+    }
 }
