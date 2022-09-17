@@ -11,14 +11,12 @@
 page {
     width: 100%;
     height: 100%;
-    background-color: #f7f7f7;
+    background-color: #ededed;
     text-align: center;
     /* margin: auto; */
 }
 
-page {
-    background-color: #ededed;
-}
+
 
 .backGround {
     width: 100%;
@@ -30,7 +28,7 @@ page {
 
 .btn {
     width: 400rpx;
-    height: 100rpx;
+    height: 80rpx;
     margin-top: 200rpx;
     border-radius: 20rpx;
     box-shadow: 1rpx 0rpx 10rpx 1rpx rgba(0, 0, 0, .2);
@@ -38,6 +36,7 @@ page {
     color: white;
     font-size: large;
 }
+
 
 .btn:active {
     background-color: teal;
@@ -64,6 +63,7 @@ page {
 }
 
 .textout {
+    margin-top: 15px;
     display: inline-block;
     margin-left: 20rpx;
     width: 360rpx;
@@ -72,6 +72,7 @@ page {
 }
 
 .word1 {
+    margin: auto;
     margin-left: 20rpx;
     font-size: 50rpx;
 }
@@ -128,4 +129,26 @@ page {
 
 .loginOut {
     margin-top: 100rpx;
+}
+.aboutMe {
+    
+        display: block;
+        margin: 20rpx auto;
+        margin-bottom: 0;
+        width: 650rpx;
+        height: 120rpx;
+        box-shadow: 1rpx 0rpx 10rpx 1rpx rgba(0, 0, 0, .02);
+        border-radius: 20rpx;
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+    
+}
+.aboutMe view{
+    text-align: center;
+    line-height: 100rpx;
+}
+#abouMebu{
+    width: 100%;
+    height: 100%;
+    border: white;
 }

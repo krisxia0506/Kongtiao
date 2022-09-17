@@ -1,5 +1,4 @@
 <!--pages/me/me.wxml-->
-<text>很明显这个页面还没想好怎么做</text>
 <view>
     <view class="backGround"></view>
 <!-- 未登录时的页面 -->
@@ -15,7 +14,7 @@
           </view>
       </view>
   </view>
-  <button bindtap="getUersProfile" class="btn">登录</button>
+  <button bindtap="getUersProfile" class="btn" type="primary">登录</button>
 </block>
 <!-- 登陆后的页面 -->
 <block wx:if="{{hiddenBlean2}}">
@@ -31,9 +30,16 @@
        </view>
     </view>
   </view>
+  <view class="aboutMe">
+  <button bindtap="aboutMe" id="abouMebu" plain="true">
+    <view>关于作者</view>
+  </button>
+    
+  </view>
   <view class="loginOut" bindtap="loginOut">
        <button>退出登录</button>
   </view>
+  
 </block>
 <view class="weui-footer">
 <view>Version 4.0.1</view>

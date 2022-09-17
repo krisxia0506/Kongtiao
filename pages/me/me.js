@@ -86,5 +86,15 @@
                  title: '您已经登录了',
              })
          }
-     }
+     },
+     aboutMe() {
+        wx.showModal({
+            title: '我还没写',
+            content: '我还没写',
+            success(res) {
+                if (res.confirm) {} else if (res.cancel) {}
+            }
+        })
+
+    }
  })
