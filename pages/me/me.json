@@ -1,0 +1,8 @@
+{
+    "usingComponents": {},
+    
+        "navigationStyle":"custom",
+        "navigationBarTextStyle":"black",
+        "backgroundColor": "#000000"
+      
+}

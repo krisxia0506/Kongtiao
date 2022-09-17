@@ -54,7 +54,7 @@ page{
 .dianliang{
 	font-size: 50px;
 }
-#bodt{
+#body{
 
 	height: 100%;
 }
@@ -62,8 +62,8 @@ page{
 	height: 40px;
 	width: 100%;
 	position: absolute;
-	margin-bottom: 15px;
-	bottom: 25px;
+	margin-bottom: 5px;
+	bottom: 0px;
 	color: rgb(141, 141, 141);
 	
 }
@@ -73,7 +73,7 @@ page{
 	width: 40px;
 	right: 5px;
 	/* top:100px; */
-	bottom: 50px;
+	bottom: 15px;
 	position:absolute;
 	padding: 0;
 	
