@@ -12,7 +12,7 @@ function initChart(canvas, width, height, dpr) {
 
   var option = {
     title: {
-      text: '用电量曲线',
+      text: '用电量曲线(Beta)',
       left: 'center'
     },
     legend: {

@@ -19,7 +19,7 @@
 
 
 <view id="inputroom">
-<button bindtap="what" style="width: 500rpx; height: 71rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx"><view style="text-decoration:underline;">八号楼房间号规则(戳我)</view></button>
+<button bindtap="what" style="width: 500rpx; height: 71rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx"><view style="text-decoration:underline;">用前须知(戳我)</view></button>
 
 <input name='room' type="number"  placeholder="输入房间号"/>
 </view>

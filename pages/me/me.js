@@ -89,12 +89,11 @@
      },
      aboutMe() {
         wx.showModal({
-            title: '我还没写',
-            content: '我还没写',
+            title: '哇呜',
+            content: '哇呜哇呜哇呜哇呜哇呜哇呜哇呜\r来topxls.cn看看',
             success(res) {
                 if (res.confirm) {} else if (res.cancel) {}
             }
         })
-
     }
  })

@@ -38,9 +38,6 @@ page {
 }
 
 
-.btn:active {
-    background-color: teal;
-}
 
 .container-out {
     display: flex;
@@ -131,24 +128,26 @@ page {
     margin-top: 100rpx;
 }
 .aboutMe {
-    
         display: block;
         margin: 20rpx auto;
         margin-bottom: 0;
         width: 650rpx;
-        height: 120rpx;
-        box-shadow: 1rpx 0rpx 10rpx 1rpx rgba(0, 0, 0, .02);
+        height: 100rpx;
         border-radius: 20rpx;
         background-color: rgb(255, 255, 255);
         text-align: center;
+        padding: 0px;
     
 }
 .aboutMe view{
     text-align: center;
+    width: 100%;
     line-height: 100rpx;
 }
-#abouMebu{
+.aboutMebu {
+    display: block;
     width: 100%;
-    height: 100%;
-    border: white;
+    height: 100rpx;
+    background-color: transparent;
+    padding: 0px;
 }

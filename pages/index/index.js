@@ -69,8 +69,8 @@ Page({
 
             })
         });
-
-        var b = p.then((data) => {
+        
+        p.then((data) => {
             //console.log(data)        
             if (data == 'error') {
                 wx.hideLoading();
@@ -112,7 +112,7 @@ Page({
             return false
         }
 
-        console.log('form发生了submit事件，携带数据为：', e.detail.value)
+        //console.log('form发生了submit事件，携带数据为：', e.detail.value)
         //console.log('e.detail.value.building是', e.detail.value.building.valueOf())
 
 
@@ -128,13 +128,12 @@ Page({
             index: e.detail.value
         })
     },
+    // 用前须知
     what() {
         wx.showModal({
-            title: '8号楼房间号规则',
-            content: '8号楼的ABCD区用1234代替\r\n例如A102房间号为1102\r\nB102房间号为2102\r\nC102房间号为3102\r\nD102房间号为4102',
-            success(res) {
-                if (res.confirm) {} else if (res.cancel) {}
-            }
+            title: '用前须知',
+            content: '8号楼的ABCD区用1234代替\r例如A102房间号为1102\rB102房间号为2102\rC102房间号为3102\rD102房间号为4102\r若需充值电量可前往\r完美校园APP-缴费-预缴费处缴费\r到账时间1-3分钟',
+            showCancel:false,
         })
 
     },
