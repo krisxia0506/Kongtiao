@@ -119,7 +119,10 @@ Page({
         //console.log('buliding是', building)
         //console.log('e.detail.value.room是', e.detail.value.room)
         this.promiseClick(building, room)
-
+        
+        //赋值全局变量,building和room，供echarts页面读取
+        getApp().globalData.building=building;
+        getApp().globalData.room=room;
 
     },
     bindPickerChange: function (e) {
@@ -132,7 +135,7 @@ Page({
     what() {
         wx.showModal({
             title: '用前须知',
-            content: '8号楼的ABCD区用1234代替\r例如A102房间号为1102\rB102房间号为2102\rC102房间号为3102\rD102房间号为4102\r若需充值电量可前往\r完美校园APP-缴费-预缴费处缴费\r到账时间1-3分钟',
+            content: '8号楼的ABCD区用1234代替\r例如A102房间号为1102\rB102房间号为2102\rC102房间号为3102\rD102房间号为4102\r若需充值电量可前往\r完美校园APP-缴费-预缴费处缴费\r到账时间1-3分钟，单价0.5元/度',
             showCancel:false,
         })
 
