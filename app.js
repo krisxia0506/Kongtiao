@@ -16,7 +16,8 @@ App({
   globalData: {
     userInfo: null,
     building:0,
-    room:0
+    room:0,
+    flag:0
   }
   
 	

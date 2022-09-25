@@ -6,19 +6,19 @@
 }
 
 #inputroom{
-	margin: 10px 0 0 0 ;
+	margin: 10rpx 0 0 0 ;
 	
 }
 
 #inputroom input{
 	background-color: white;
 	border-radius:10px;
-    height: 40px;
-    width: 100px;
+    height: 80rpx;
+    width: 200rpx;
     display: block;
     margin: auto;
     text-align: center;
-	border: 2px solid rgb(143, 143, 143);
+	border: 5rpx solid rgb(143, 143, 143);
 	font-style: red;
 	
 }
@@ -36,14 +36,14 @@ page{
 }
 .building{
 	background-color: white;
-	height: 50px;
+	height: 100rpx;
 	text-align: center;
 	border-radius:10px;
 }
 .picker{
 	height: 100%;
 	margin: auto;
-	line-height: 50px;
+	line-height: 100rpx;
 }
 .form{
 	display: block;
@@ -52,18 +52,25 @@ page{
 }
 
 .dianliang{
-	font-size: 50px;
+    padding-left: 20rpx;
+	font-size: 100rpx;
 }
 #body{
 
 	height: 100%;
 }
+.power{
+    height: 280rpx;
+
+}
 .weui-footer{
-	height: 40px;
+    float: left;
+	height: 50rpx;
 	width: 100%;
-	position: absolute;
-	margin-bottom: 5px;
-	bottom: 0px;
+    /* position: absolute; */
+    position:sticky;
+	margin-bottom: 5rpx;
+	bottom: 0rpx;
 	color: rgb(141, 141, 141);
 	
 }
@@ -71,9 +78,9 @@ page{
 	display:flex;
 	height: 40px;
 	width: 40px;
-	right: 5px;
+	right: 5rpx;
 	/* top:100px; */
-	bottom: 15px;
+	bottom: 20rpx;
 	position:absolute;
 	padding: 0;
 	

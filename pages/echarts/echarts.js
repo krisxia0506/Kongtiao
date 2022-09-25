@@ -22,7 +22,7 @@ function doHandleMonth(month) {
 
 function d7(){
     const time=new Array;
-    for(var i=-7;i<=0;i++){
+    for(var i=-6;i<=0;i++){
     time.push(getDay(i))
     }
     return time
@@ -45,10 +45,10 @@ function setOption(chart) {
             success: (res) => {
                 //捕获json.pause异常
                 try {
-                    console.log(JSON.parse(res.data))
+                    //console.log(JSON.parse(res.data))
                     resolve(JSON.parse(res.data))
                 } catch (e) {
-                    console.log(e.message);
+                   // console.log(e.message);
                     resolve('error')
                 }
             }
@@ -116,6 +116,8 @@ Page({
     onReady: function () {
         // 获取组件
         this.ecComponent = this.selectComponent('#mychart-dom-bar');
+        this.init()
+        
     },
 
     data: {
@@ -124,17 +126,24 @@ Page({
             lazyLoad: false
         },
         isLoaded: true,
-        isDisposed: false
+        isDisposed: false,
+        flag:"0"
     },
 
     // 点击按钮后初始化图表
     init: function () {
         if (app.globalData.building == 0 || app.globalData.room == 0) {
+            if(app.globalData.flag==0){
             wx.showModal({
                 title: '先选择宿舍哦',
-                content: '请先在 首页 查看剩余电量后才能查看图表哦',
+                content: '请先在 首页 查询剩余电量后才能查看图表哦',
                 showCancel: false,
+                success (res){
+                    app.globalData.flag=0
+                }
             })
+            app.globalData.flag=1
+        }
         } else {
             this.ecComponent.init((canvas, width, height, dpr) => {
                 // 获取组件的 canvas、width、height 后的回调函数
@@ -156,7 +165,11 @@ Page({
             });
         }
     },
-    onShow: function () {
-
+    onShow:function(){
+        try{
+            this.init();
+        }catch{
+            console.log("onshow首次加载失败")
+        }
     }
 });
