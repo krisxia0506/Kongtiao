@@ -32,6 +32,7 @@
 <view class="power">
 <view id="sydl" style="font-size: 40px;"><text>{{shengyu}}</text></view>
 <view class="dianliang">{{kongtiao}}<text style="font-size: 25px; font-weight: bold;">{{du}}</text></view>
+<view class="avg">{{avg}}</view>
 </view>
 
 

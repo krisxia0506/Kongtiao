@@ -17,7 +17,8 @@ App({
     userInfo: null,
     building:0,
     room:0,
-    flag:0
+    flag:0,
+    todaypower:0
   }
   
 	

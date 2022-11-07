@@ -47,13 +47,16 @@ page{
 }
 .form{
 	display: block;
-	margin-top: 30rpx;
 	/* margin: 50px auto; */
 }
 
 .dianliang{
     padding-left: 20rpx;
-	font-size: 100rpx;
+    font-size: 100rpx;
+    
+}
+.avg{
+    padding-bottom: 80rpx;
 }
 #body{
 
@@ -64,11 +67,11 @@ page{
 
 }
 .weui-footer{
-    float: left;
+    /* float: left; */
 	height: 50rpx;
 	width: 100%;
-    /* position: absolute; */
-    position:sticky;
+    position: fixed;
+    /* position:sticky; */
 	margin-bottom: 5rpx;
 	bottom: 0rpx;
 	color: rgb(141, 141, 141);
@@ -81,7 +84,7 @@ page{
 	right: 5rpx;
 	/* top:100px; */
 	bottom: 20rpx;
-	position:absolute;
+	position:fixed;
 	padding: 0;
 	
 }

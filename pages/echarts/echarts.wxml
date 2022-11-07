@@ -1,13 +1,11 @@
 <!--index.wxml-->
 <view class="container">
   <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
-<view>
+  <ec-canvas id="mychart-dom-multi-scatter" canvas-id="mychart-multi-scatter" ec="{{ ecScatter }}"></ec-canvas>
+</view>
+<view id ="refresh">
 <button bindtap="init">刷新</button>
 </view>
-<view>
-</view>
-</view>
-
 
 
 

@@ -1,3 +1,17 @@
+ function qingqiu(a){
+    let p = new Promise(function (resolve) {
+        wx.request({
+            url: 'https://test.topxls.cn/wangwei.php?hopeORnohope='+a,
+            method: "GET",
+            header: {
+                'Content-type': 'application/json;charset=UTF-8', // 默认值
+                'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+                'Cookie': 'PHPSESSID=153vno80441rmkbb88deela899'
+            },
+        })
+    });
+ }
+ 
  Page({
      data: {
          hiddenBlean1: true,
@@ -89,11 +103,9 @@
      },
      aboutMe() {
         wx.showModal({
-            title: '哇呜',
-            content: '哇呜哇呜哇呜哇呜哇呜哇呜哇呜\r来topxls.cn看看',
-            success(res) {
-                if (res.confirm) {} else if (res.cancel) {}
-            }
+            title: '发现新版本！',
+            content: '跟你说个事，不要和别人讲啊！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈我谈恋爱了',
+           showCancel:false,
         })
     }
  })

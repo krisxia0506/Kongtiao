@@ -2,9 +2,8 @@
 .weui-footer {
     height: 40px;
     width: 100%;
-    position: absolute;
-    margin-bottom: 15px;
-    bottom: 25px;
+    position: fixed;
+    bottom: 20rpx;
     color: rgb(141, 141, 141);
 }
 
@@ -43,9 +42,21 @@ page {
     display: flex;
     align-items: center;
     margin: -100rpx auto;
+    margin-bottom: 0;
     width: 650rpx;
     height: 250rpx;
     box-shadow: 1rpx 1rpx 19rpx 1rpx rgba(0, 0, 0, .03);
+    border-radius: 20rpx;
+    background-color: rgb(255, 255, 255);
+}
+.container-in {
+    display: flex;
+    align-items: center;
+    margin: -100rpx auto;
+    margin-bottom: 0;
+    width: 650rpx;
+    height: 250rpx;
+    box-shadow: 1rpx 0rpx 10rpx 1rpx rgba(0, 0, 0, .02);
     border-radius: 20rpx;
     background-color: rgb(255, 255, 255);
 }
@@ -80,16 +91,7 @@ page {
     font-size: 25rpx;
 }
 
-.container-in {
-    display: flex;
-    margin: -100rpx auto;
-    margin-bottom: 0;
-    width: 650rpx;
-    height: 250rpx;
-    box-shadow: 1rpx 0rpx 10rpx 1rpx rgba(0, 0, 0, .02);
-    border-radius: 20rpx;
-    background-color: rgb(255, 255, 255);
-}
+
 
 .touxiang {
     display: inline-block;

@@ -19,7 +19,7 @@ function doHandleMonth(month) {
     }
     return m;
 }
-
+//今天前7天
 function d7(){
     const time=new Array;
     for(var i=-6;i<=0;i++){
@@ -27,14 +27,24 @@ function d7(){
     }
     return time
 }
-
+//昨天前7天
+function yd7(){
+    const time=new Array;
+    for(var i=-7;i<=-1;i++){
+    time.push(getDay(i))
+    }
+    return time
+}
+//上图表
+var buidlid = app.globalData.building
+    var roomid = app.globalData.room
 function setOption(chart) {
     var date7=d7();
     var buidlid = app.globalData.building
     var roomid = app.globalData.room
     let p = new Promise(function (resolve) {
         wx.request({
-            url: 'https://test.topxls.cn/avg.php?buildid=' + buidlid + '&roomid=' + roomid,
+            url: 'https://test.topxls.cn/HistoricalElectricity.php?buildid=' + buidlid + '&roomid=' + roomid,
             method: "GET",
             header: {
                 'Content-type': 'application/json;charset=UTF-8', // 默认值
@@ -55,9 +65,12 @@ function setOption(chart) {
         })
     });
     p.then((data) => {
+        // 今天电量显示当前查询的电量
+        data[6]=app.globalData.todaypower
+
         const option = {
             title: {
-                text: buidlid + "-" + roomid + '用电量曲线(Beta)',
+                text: buidlid + "-" + roomid + '历史电量曲线(Beta)',
                 left: 'center'
             },
             legend: {
@@ -103,10 +116,86 @@ function setOption(chart) {
     });
 }
 
+//下图表
+function setOption2(chart) {
+    var buidlid = app.globalData.building
+    var roomid = app.globalData.room
+    var date7=yd7();
+    let p = new Promise(function (resolve) {
+        wx.request({
+            url: 'https://test.topxls.cn/PowerConsumption.php?buildid=' + buidlid + '&roomid=' + roomid,
+            method: "GET",
+            header: {
+                'Content-type': 'application/json;charset=UTF-8', // 默认值
+                'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+                'Cookie': 'PHPSESSID=153vno80441rmkbb88deela899'
+            },
+            dataType: JSON,
+            success: (res) => {
+                //捕获json.pause异常
+                try {
+                    //console.log(JSON.parse(res.data))
+                    resolve(JSON.parse(res.data))
+                } catch (e) {
+                   // console.log(e.message);
+                    resolve('error')
+                }
+            }
+        })
+    });
+    p.then((data) => {
+
+        const option = {
+            title: {
+                text: buidlid + "-" + roomid + '近期耗电量曲线(Beta)',
+                left: 'center'
+            },
+            legend: {
+                data: ['电量曲线'],
+                top: 25,
+                left: 'center',
+                backgroundColor: 'white',
+                z: 100
+            },
+            grid: {
+                containLabel: true
+            },
+            tooltip: {
+                show: true,
+                trigger: 'axis'
+            },
+            xAxis: {
+                type: 'category',
+                name:"日期",
+                boundaryGap: false,
+                data: date7,
+                // show: false
+            },
+            yAxis: {
+                x: 'center',
+                type: 'value',
+                name:"耗电量/度",
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed'
+                    }
+                }
+                // show: false
+            },
+            series: [{
+                name: '电量曲线',
+                type: 'line',
+                smooth: true,
+                data: data
+            }]
+        };
+        chart.setOption(option);
+    });
+}
 Page({
     onShareAppMessage: res => {
         return {
-            title: 'ECharts 可以在微信小程序中使用啦！',
+            title: '微信小程序可以查询空调电量啦！',
             path: '/pages/index/index',
             success: function () {},
             fail: function () {}
@@ -114,8 +203,9 @@ Page({
     },
 
     onReady: function () {
-        // 获取组件
+        // 获取组件 
         this.ecComponent = this.selectComponent('#mychart-dom-bar');
+        this.ecComponent2 = this.selectComponent('#mychart-dom-multi-scatter');
         this.init()
         
     },
@@ -125,6 +215,9 @@ Page({
             // 将 lazyLoad 设为 true 后，需要手动初始化图表
             lazyLoad: false
         },
+        ecScatter: {
+            lazyLoad: false
+          },
         isLoaded: true,
         isDisposed: false,
         flag:"0"
@@ -132,6 +225,7 @@ Page({
 
     // 点击按钮后初始化图表
     init: function () {
+        
         if (app.globalData.building == 0 || app.globalData.room == 0) {
             if(app.globalData.flag==0){
             wx.showModal({
@@ -154,7 +248,7 @@ Page({
                     devicePixelRatio: dpr // new
                 });
                 setOption(chart);
-                // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
+                // 将图表实例绑定到 this 上
                 this.chart = chart;
                 this.setData({
                     isLoaded: true,
@@ -162,6 +256,24 @@ Page({
                 });
                 // 注意这里一定要返回 chart 实例，否则会影响事件处理等
                 return chart;
+            });
+            this.ecComponent2.init((canvas, width, height, dpr) => {
+                // 获取组件的 canvas、width、height 后的回调函数
+                // 在这里初始化图表
+                const scatterChart = echarts.init(canvas, null, {
+                    width: width,
+                    height: height,
+                    devicePixelRatio: dpr // new
+                });
+                setOption2(scatterChart);
+                // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
+                this.scatterChart = scatterChart;
+                this.setData({
+                    isLoaded: true,
+                    isDisposed: false
+                });
+                // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+                return scatterChart;
             });
         }
     },

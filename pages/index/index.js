@@ -1,6 +1,4 @@
 // pages/list.js
-//kongtiao1='123'
-
 Page({
     promiseClick(building, room) {
         var building_id2post = {
@@ -24,24 +22,17 @@ Page({
             wx.request({
                 url: 'https://test.topxls.cn/curl.php?cs=' + building_id2post[building] + room,
                 method: "GET",
-                header: {
-                    'Content-type': 'application/json;charset=UTF-8', // 默认值
-                    'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
-                    'Cookie': 'PHPSESSID=153vno80441rmkbb88deela899'
-                },
-
                 dataType: JSON,
-
                 success: (res) => {
                     //捕获json.pause异常
                     try {
                         //判断查询结果json的returncode字段
                         if (JSON.parse(res.data).returncode == '100') {
+                            //查询成果返回json的quantity字段 
                             resolve(JSON.parse(res.data).quantity)
                         } else if (JSON.parse(res.data).returncode == '-600') {
-                            resolve('error1')
+                            resolve('-600')
                         } else {
-                            //查询成果返回json的quantity字段            
                             resolve('error')
                             //console.log(JSON.parse(res.data).quantity)
                         }
@@ -52,7 +43,7 @@ Page({
                     }
                 },
                 fail: (data) => {
-                    // 这里可以对请求超时之后。我们可以自定义的业务逻辑,这里只是简单举例
+                    // 这里可以对请求超时之后。自定义的业务逻辑
                     reject(data);
                     wx.hideLoading();
                     wx.showModal({
@@ -66,7 +57,23 @@ Page({
                         }
                     })
                 }
-
+            })
+        });
+        let avg = new Promise(function (resolve) {
+            wx.request({
+                url: 'https://test.topxls.cn/avg.php?buildid='+building+'&roomid=' + room,
+                method: "GET",
+                dataType: JSON,
+                success: (res) => {
+                    //捕获json.pause异常
+                    try {      
+                        resolve(JSON.parse(res.data))
+                    } catch (e) {
+                        console.log(e.message);
+                        wx.hideLoading();
+                        resolve('error')
+                    }
+                },
             })
         });
         
@@ -74,17 +81,17 @@ Page({
             //console.log(data)        
             if (data == 'error') {
                 wx.hideLoading();
-                this.setData({
-                    shengyu: '请输入正确的房间号',
-                    kongtiao: '',
-                    du: ''
+                wx.showModal({
+                    title: '输错了哦',
+                    content: '请输入正确的宿舍',
+                    showCancel:false,
                 })
-            } else if (data == 'error1') {
+            } else if (data == '-600') {
                 wx.hideLoading();
-                this.setData({
-                    shengyu: '系统升级维护中',
-                    kongtiao: '请稍后重试',
-                    du: ''
+                wx.showModal({
+                    title: '系统维护',
+                    content: '系统维护中，请稍后重试',
+                    showCancel:false,
                 })
             } else {
                 wx.hideLoading();
@@ -93,41 +100,41 @@ Page({
                     kongtiao: data,
                     du: '度'
                 })
+                // 传递参数给echarts
+                getApp().globalData.building=building;
+                getApp().globalData.room=room;
+                getApp().globalData.todaypower=data;
             }
+            avg.then((data) => {     
+                if(data!=''){
+                    data="近七天日平均用电"+data+"度"
+                    this.setData({
+                        avg: data,
+                    }) 
+                }       
         });
-
-
+        });
+        
     },
     //点击查询后执行    
     formSubmit(e) {
-
         let room = e.detail.value.room;
         let building = e.detail.value.building.valueOf()
         if (e.detail.value.building == -1 || e.detail.value.building == 0) {
-            this.setData({
-                shengyu: '',
-                kongtiao: '请输入正确的房间号',
-                du: ''
+            wx.showModal({
+                title: '输错了哦',
+                content: '请输入正确的宿舍',
+                showCancel:false,
             })
             return false
         }
-
-        //console.log('form发生了submit事件，携带数据为：', e.detail.value)
-        //console.log('e.detail.value.building是', e.detail.value.building.valueOf())
-
-
-        //console.log('buliding是', building)
-        //console.log('e.detail.value.room是', e.detail.value.room)
+        // 执行查询
         this.promiseClick(building, room)
-        
-        //赋值全局变量,building和room，供echarts页面读取
-        getApp().globalData.building=building;
-        getApp().globalData.room=room;
-
     },
     bindPickerChange: function (e) {
-        //console.log('picker发送选择改变，携带值为', e.detail.value)
+        // console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
+            // 楼号
             index: e.detail.value
         })
     },
@@ -138,7 +145,6 @@ Page({
             content: '8号楼的ABCD区用1234代替\r例如A102房间号为1102\rB102房间号为2102\rC102房间号为3102\rD102房间号为4102\r若需充值电量可前往\r完美校园APP-缴费-预缴费处缴费\r到账时间1-3分钟，单价0.5元/度',
             showCancel:false,
         })
-
     },
 
     /**
@@ -150,9 +156,10 @@ Page({
         shengyu: '',
         index: 0,
         kongtiao: '',
-        du: ''
+        du: '',
+        avg:''
     },
-
+    
 
 
     /**
@@ -209,7 +216,13 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage() {
+    onShareAppMessage: res => {
+        return {
+            title: '微信小程序可以查询空调电量啦！',
+            path: '/pages/index/index',
+            success: function () {},
+            fail: function () {}
+        }
+    },
 
-    }
 })
