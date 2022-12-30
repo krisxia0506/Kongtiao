@@ -42,23 +42,9 @@ Page({
                         resolve('error')
                     }
                 },
-                fail: (data) => {
-                    // 这里可以对请求超时之后。自定义的业务逻辑
-                    reject(data);
-                    wx.hideLoading();
-                    wx.showModal({
-                        content: "请求超时...",
-                        showCancel: false,
-                        success: (res) => {
-                            // 重定向会首页
-                            tt.redirectTo({
-                                url: 'pages/index/index'
-                            })
-                        }
-                    })
-                }
             })
         });
+        
         let avg = new Promise(function (resolve) {
             wx.request({
                 url: 'https://test.topxls.cn/avg.php?buildid='+building+'&roomid=' + room,
